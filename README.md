@@ -46,5 +46,14 @@ Playing around with microfrontends using Webpack Module Federation.
   ```
   And now in case of incompatible versions there would be a console warning about it.
 
+#### Bonus
+If we don't want to manually add the shared dependensied, we can try to ask Webpack to figure it out for us. To do that, we have to import `package.json` in our webpack config and replace shared array with package dependencies:
+```js
+const packageJson = require('../package.json');
+
+// ModuleFederationPlugin config
+shared: packageJson.dependencies,
+```
+
 ### Executing Context
 We should NOT assume that some DOM element would exist in Container app, so we should export a function that can be called from the Container app (and pass DOM element as parameter). Also for local development, some extra code would be required, just to check if we're running it in isolation.
